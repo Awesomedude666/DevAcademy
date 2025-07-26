@@ -99,10 +99,16 @@ function Player() {
 
 
   const toggleSection = (index) => {
-    setOpenSection((prev) => {
-      prev[index] = !prev[index];
-      return { ...prev };
-    })
+    // setOpenSection((prev) => {
+    //   prev[index] = !prev[index];
+    //   return { ...prev };
+    // })
+
+    setOpenSection((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+
   }
 
 
