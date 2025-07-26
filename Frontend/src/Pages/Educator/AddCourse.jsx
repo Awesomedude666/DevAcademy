@@ -161,7 +161,7 @@ function AddCourse() {
       <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md w-full text-gray-200'>
         <div className='flex flex-col gap-1'>
           <p className=''>Course Title</p>
-          <input onChange={e => setCourseTitle(e.target.value)} value={courseTitle} type="text" placeholder='Type here' className='outline-none md:py-2.5 py-2 px-3 rounded border border-gray-300' required />
+          <input onChange={e => setCourseTitle(e.target.value)} value={courseTitle} type="text" placeholder='Type here' className='outline-none md:py-2.5 py-2 px-3 rounded border border-gray-300 bg-gray-950' required />
         </div>
 
         <div className='flex flex-col gap-1'>
@@ -172,7 +172,7 @@ function AddCourse() {
         <div className='flex items-center justify-between flex-wrap'>
           <div className='flex flex-col gap-1'>
             <p>Course Price</p>
-            <input onChange={e => setCoursePrice(e.target.value)} value={coursePrice} type="number" placeholder='0' className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-300' required />
+            <input onChange={e => setCoursePrice(e.target.value)} value={coursePrice} type="number" placeholder='0' className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-300 bg-gray-950' required />
           </ div>
 
           <div className='flex md:flex-row flex-col items-center gap-3'>
@@ -187,7 +187,7 @@ function AddCourse() {
 
         <div className='flex flex-col gap-1'>
           <p>Discount %</p>
-          <input onChange={e => setDiscount(e.target.value)} value={discount} type="number" placeholder='0' min={0} max={100} className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-300' required />
+          <input onChange={e => setDiscount(e.target.value)} value={discount} type="number" placeholder='0' min={0} max={100} className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-300 bg-gray-950' required />
         </div>
 
         {/* Adding Chapters and Lectures */}
