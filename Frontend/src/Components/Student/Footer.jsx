@@ -22,7 +22,7 @@ function Footer() {
           <p className='text-sm text-gray-200'>The latest news, articles and resources, sent to your inbox weekly.</p>
           <div className='flex items-center gap-2 pt-4'>
             <input className="border border-gray-200 text-gray-300 placeholder-gray-500 outline-none rounded px-2 text-sm w-64 h-9"type="email" placeholder='Enter your email'/>
-            <button className='bg-blue-500 w-24 h-9 text-gray-100 rounded'>Subscribe</button>
+            <button className='bg-blue-600 w-24 h-9 text-gray-100 rounded hover:bg-blue-500'>Subscribe</button>
           </div>
         </div>
 

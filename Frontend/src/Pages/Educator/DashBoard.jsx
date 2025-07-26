@@ -4,20 +4,37 @@ import { dummyDashboardData } from '../../assets/assets';
 import { assets } from '../../assets/assets';
 import { useState, useEffect } from 'react';
 import Loading from '../../Components/Student/Loading';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 function DashBoard() {
 
-  const { currency} = useContext(AppContext)
+  const { currency, backendUrl, getToken, isEducator} = useContext(AppContext)
   const [dashboardData, setDashboardData] = useState(null);
 
   const fetchDashboardData = async () => {
-    setDashboardData(dummyDashboardData);
+    try {
+      const token = await getToken();
+      const {data} = await axios.get(backendUrl + '/api/educator/dashboard', { headers: { Authorization: `Bearer ${token}`}});
+
+      if(data.success){
+        setDashboardData(data.dashboardData);
+      }
+      else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 
   useEffect(() => {
-    fetchDashboardData();
-  }, []);
-  
+    if (isEducator) {
+      fetchDashboardData();
+    }
+  }, [isEducator]);
+
 
 
    return dashboardData ? (
@@ -41,7 +58,7 @@ function DashBoard() {
             <div className='flex items-center gap-3 border border-blue-500 p-4 w-56 rounded-md'>
               <img src={assets.earning_icon} alt="patients_icon" />
               <div>
-                <p className='text-2xl font-medium text-gray-300'>{currency}{Math.floor(dashboardData.totalEarnings)}</p>
+                <p className='text-2xl font-medium text-gray-300'>{currency}{Math.floor(dashboardData.totalEarning)}</p>
                 <p className='text-base text-gray-300'>Total Earnings</p>
               </div>
             </div>

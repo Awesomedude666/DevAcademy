@@ -24,7 +24,6 @@ export const getCourseById = async (req, res) => {
 
     try {
         const courseData = await Course.findById(id)
-        .select(['-enrolledStudents'])
         .populate({path:'educator', select: 'name image'});
 
         // remove lecture url if isPreviewFree is false

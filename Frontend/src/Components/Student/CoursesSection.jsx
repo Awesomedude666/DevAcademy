@@ -21,7 +21,7 @@ function CoursesSection() {
         {allCourses.slice(0,4).map((course, index) => <CourseCard key={index} course={course}/>)}
       </div>
 
-      <Link to={'/courses-list'} onClick={() => scrollTo(0,0)} className="text-gray-300 border border-gray-500 px-10 py-3 rounded inline-block mt-3">Show all courses</Link>
+      <Link to={'/courses-list'} onClick={() => scrollTo(0,0)} className="text-gray-300 border border-gray-500 px-10 py-3 rounded inline-block mt-3 hover:bg-gray-900">Show all courses</Link>
 
 
     </div>

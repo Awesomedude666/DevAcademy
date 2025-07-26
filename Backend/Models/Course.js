@@ -10,7 +10,7 @@ const lectureSchema = new mongoose.Schema({
         required : true
     },
     lectureDuration : {
-        type : String,
+        type : Number,
         required : true
     },
     lectureUrl : {
@@ -64,7 +64,7 @@ const courseSchema = new mongoose.Schema({
     },
     IsPublished : {
         type : Boolean,
-        default : false
+        default : true
     },
     discount : {
         type : Number,

@@ -1,18 +1,47 @@
 import React from 'react'
 import {assets} from '../../assets/assets'; // Adjust the path as necessary
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react';
 import { useContext } from 'react';
 import { AppContext } from '../../Context/AppContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Navbar() {
 
-  const {navigate,isEducator, } = useContext(AppContext);
+  const {navigate,isEducator, backendUrl, setIsEducator, getToken } = useContext(AppContext);
 
+
+  const location = useLocation();
+  // Check if the current path includes '/courses-list'
   const isCourseListPage = location.pathname.includes('/courses-list');
 
   const {openSignIn} = useClerk();
   const { user } = useUser();
+
+  const becomeEducator = async () => {
+    try {
+      if(isEducator){
+        navigate('/educator');
+        return;
+      }
+      const token = await getToken();
+      toast.info('Please wait, we are processing your request to become an educator...');
+      // Make a request to the backend to update the user role
+      const {data} = await axios.get(backendUrl + '/api/educator/update-role', {headers:{Authorization:`Bearer ${token}`}});
+
+      if(data.success){
+        setIsEducator(true);
+        toast.success('You are now an educator!');
+        navigate('/educator');
+      }
+      else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <div className={`flex items-center text-white justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 ${isCourseListPage ? 'bg-gray-950' : 'bg-black'}`}>
@@ -24,7 +53,7 @@ function Navbar() {
       <div className="flex items-center gap-5">
         {user && 
         <>
-        <button onClick={() => {navigate('/educator')}} className='hover:text-blue-300 transition-colors duration-200'>{isEducator ? 'Educator Dashboard' : 'Become Educator'}</button>
+        <button onClick={becomeEducator} className='hover:text-blue-300 transition-colors duration-200'>{isEducator ? 'Educator Dashboard' : 'Become Educator'}</button>
         <Link to='/my-enrollments' className='hover:text-blue-300 transition-colors duration-200'>My Enrollments</Link>
         </>
         }
@@ -42,7 +71,7 @@ function Navbar() {
         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
           {user && 
           <>
-          <button onClick={() => {navigate('/educator')}} className='hover:text-blue-300 transition-colors duration-200'>{isEducator ? 'Educator Dashboard' : 'Become Educator'}</button>
+          <button onClick={becomeEducator} className='hover:text-blue-300 transition-colors duration-200'>{isEducator ? 'Educator Dashboard' : 'Become Educator'}</button>
           <Link to='/my-enrollments' className='hover:text-blue-300 transition-colors duration-200'>My Enrollments</Link>
           </>
           }

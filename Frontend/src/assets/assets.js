@@ -93,25 +93,25 @@ export const assets = {
 
 export const dummyTestimonial = [
     {
-        name: 'Donald Jackman',
+        name: 'Arjun Sharma',
         role: 'SWE 1 @ Amazon',
         image: assets.profile_img_1,
         rating: 5,
-        feedback: 'I\'ve been using Imagify for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.',
+        feedback: "The Data Structures and Algorithms course on DevAcademy is a game-changer. The explanations are incredibly clear, and the focus on competitive programming patterns helped me finally start solving problems on platforms like Codeforces. It's the perfect supplement to my college syllabus.",
     },
     {
-        name: 'Richard Nelson',
+        name: 'Vikram Singh',
         role: 'SWE 2 @ Samsung',
         image: assets.profile_img_2,
         rating: 4,
-        feedback: 'I\'ve been using Imagify for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.',
+        feedback: "I was looking to switch careers into web development, and DevAcademy provided the perfect roadmap. The full-stack MERN course took me from basics to building a complete project. The hands-on approach gave me the confidence and the portfolio I needed to start applying for jobs.",
     },
     {
-        name: 'James Washington',
+        name: 'Rohan Mehta',
         role: 'SWE 2 @ Google',
         image: assets.profile_img_3,
         rating: 4.5,
-        feedback: 'I\'ve been using Imagify for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.',
+        feedback: "As a working professional, I need courses that are direct and to the point. The advanced Node.js and backend architecture courses on DevAcademy are fantastic. The content is high-quality, practical, and the platform is so easy to use. I was able to upskill without wasting any time.",
     },
 ];
 

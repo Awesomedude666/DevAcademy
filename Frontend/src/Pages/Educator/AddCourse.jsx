@@ -1,11 +1,16 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import uniqid from 'uniqid';
 import Quill from 'quill';
 import { useState, useEffect } from 'react';
 import { assets } from '../../assets/assets';
+import { AppContext } from '../../Context/AppContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 function AddCourse() {
+
+  const { getToken, backendUrl,} = useContext(AppContext);
 
   const quillRef = useRef(null);
   const editorRef = useRef(null);
@@ -107,6 +112,7 @@ function AddCourse() {
   
         if (!image) {
           toast.error('Thumbnail Not Selected')
+          return;
         }
   
         const courseData = {
@@ -121,14 +127,18 @@ function AddCourse() {
         formData.append('courseData', JSON.stringify(courseData))
         formData.append('image', image)
   
-        const token = await getToken()
-  
+        const token = await getToken() 
+
+        toast.info('Adding Course...wait a moment')
+
         const { data } = await axios.post(backendUrl + '/api/educator/add-course', formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
   
         if (data.success) {
           toast.success(data.message)
+          // fetchAllCourses();
+          // Reset form fields
           setCourseTitle('')
           setCoursePrice(0)
           setDiscount(0)
@@ -144,20 +154,12 @@ function AddCourse() {
       }
   
     };
-
-
-    useEffect(() => {
-        console.log(chapters);
-      }, [chapters]);
     
-  
-
-  
 
 
   return (
     <div className='h-screen overflow-scroll flex flex-col items-start justify-between md:p-8 md:pb-0 p-4 pt-8 pb-0'>
-      <form className='flex flex-col gap-4 max-w-md w-full text-gray-200'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md w-full text-gray-200'>
         <div className='flex flex-col gap-1'>
           <p className=''>Course Title</p>
           <input onChange={e => setCourseTitle(e.target.value)} value={courseTitle} type="text" placeholder='Type here' className='outline-none md:py-2.5 py-2 px-3 rounded border border-gray-300' required />
@@ -209,14 +211,14 @@ function AddCourse() {
                       <img onClick={() => handleLecture('remove', chapter.chapterId, lectureIndex)} src={assets.cross_icon} alt="" className='cursor-pointer' />
                     </div>
                   ))}
-                  <div className="inline-flex bg-gray-100 p-2 rounded cursor-pointer mt-2" onClick={() => handleLecture('add', chapter.chapterId)}>
+                  <div className="inline-flex bg-gray-800 p-2 rounded cursor-pointer mt-2 hover:bg-gray-700" onClick={() => handleLecture('add', chapter.chapterId)}>
                     + Add Lecture
                   </div>
                 </div>
               )}
             </div>
           ))}
-          <div className="flex justify-center items-center bg-blue-100 p-2 rounded-lg cursor-pointer" onClick={() => handleChapter('add')}>
+          <div className="flex justify-center items-center bg-gray-800 p-2 rounded-lg cursor-pointer hover:bg-gray-700" onClick={() => handleChapter('add')}>
             + Add Chapter
           </div>
 
@@ -266,7 +268,7 @@ function AddCourse() {
           )}
         </div>
 
-        <button type="submit" className='bg-black text-white w-max py-2.5 px-8 rounded my-4'>
+        <button type="submit" className='bg-gray-800 text-white w-max py-2.5 px-8 rounded my-4 hover:bg-gray-700 active:bg-gray-600'>
           ADD
         </button>
 

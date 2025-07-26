@@ -6,7 +6,7 @@ const courseProgressSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    CourseId : {
+    courseId : {
         type : String,
         required : true
     },
@@ -14,7 +14,10 @@ const courseProgressSchema = new mongoose.Schema({
         type : Boolean,
         default : false
     },
-    lectureCompleted : []
+    lectureCompleted : {
+        type : [String],
+        default : []
+    }
 
 }, {minimize: false});
 
