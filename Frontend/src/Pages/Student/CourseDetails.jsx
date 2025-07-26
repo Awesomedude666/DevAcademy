@@ -24,11 +24,11 @@ function CourseDetails() {
 
   const fetchCourseData = async () => {
     try {
-      const {data} = await axios.get(backendUrl + '/api/course/' + id)
-      if(data.success){
+      const { data } = await axios.get(backendUrl + '/api/course/' + id)
+      if (data.success) {
         setCourseData(data.courseData);
       }
-      else{
+      else {
         toast.error(data.message);
       }
     } catch (error) {
@@ -36,27 +36,27 @@ function CourseDetails() {
     }
   }
 
-  const enrollCourse = async() => {
+  const enrollCourse = async () => {
     try {
-      if(!userData){
+      if (!userData) {
         return toast.warn('Login to Enroll')
       }
 
-      if(isAlreadyEnrolled){
+      if (isAlreadyEnrolled) {
         return toast.warn('You are already enrolled in this course');
       }
 
       const token = await getToken();
-      const {data} = await axios.post(backendUrl + '/api/user/purchase', {courseId: courseData._id}, {headers: {Authorization: `Bearer ${token}`}});
+      const { data } = await axios.post(backendUrl + '/api/user/purchase', { courseId: courseData._id }, { headers: { Authorization: `Bearer ${token}` } });
 
-      if(data.success){
-        const {session_url} = data
+      if (data.success) {
+        const { session_url } = data
         window.location.href = session_url
       }
-      else{
+      else {
         toast.error(data.message);
       }
- 
+
     } catch (error) {
       toast.error(error.message);
     }
@@ -67,19 +67,28 @@ function CourseDetails() {
   }, [])
 
   useEffect(() => {
-    if(userData && courseData){
+    if (userData && courseData) {
       setIsAlreadyEnrolled(userData.enrolledCourses.includes(courseData._id));
     }
   }, [userData, courseData])
 
   const toggleSection = (index) => {
-    setOpenSection((prev) => {
-      prev[index] = !prev[index];
-      return { ...prev };
-    })
+    // setOpenSection((prev) => {
+    //   prev[index] = !prev[index];
+    //   return { ...prev };
+    // })
+
+    setOpenSection((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+
   } // prev is previous state object. 
   // we directly toggle the value at prev[index]
   // we return a new object using {...prev} to trigger re-render.
+
+
+
 
 
   return courseData ? (
@@ -157,7 +166,7 @@ function CourseDetails() {
 
 
 
-            
+
 
           </div>
 
@@ -182,7 +191,7 @@ function CourseDetails() {
                   autoplay: 1,
                 }
               }} iframeClassName='w-full aspect-video' />
-              
+
               : <img src={courseData.courseThumbnail} alt="courseThumbnail" />
           }
 
@@ -240,7 +249,7 @@ function CourseDetails() {
 
 
       </div>
-      
+
     </>
   ) : <Loading />
 }
