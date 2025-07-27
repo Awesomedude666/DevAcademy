@@ -5,7 +5,7 @@
 <!-- Badges -->
 <p align="center">
   <a href="https://dev-academy-frontend.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-▲-blue?style=for-the-badge&logo=vercel" alt="Live Demo" /></a>
-  <a href="https://github.com/Awesomedude666/DevAcademy/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" /></a>
+  <a href="https://opensource.org/license/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" /></a>
   <a href="#"><img src="https://img.shields.io/badge/Project_Status-Completed-green?style=for-the-badge" alt="Project Status" /></a>
 </p>
 
@@ -176,6 +176,6 @@ If you have suggestions for improvements, new features, or bug fixes, please fee
 
 ## 📫 Contact
 
-Devendar Reddy - [Email](devendar.reddy.engineer@gmail.com) - [LinkedIn](https://www.linkedin.com/in/d4devendar/)
+Devendar Reddy - devendar.reddy.engineer@gmail.com - [LinkedIn](https://www.linkedin.com/in/d4devendar/)
 
 Project Link: [https://github.com/Awesomedude666/DevAcademy](https://github.com/Awesomedude666/DevAcademy)
