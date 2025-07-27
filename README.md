@@ -1,4 +1,6 @@
+<h1 align="center">
 # DevAcademy - Full-Stack E-Learning Platform
+</h1>
 
 <!-- Badges -->
 <p align="center">
