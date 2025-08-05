@@ -64,7 +64,7 @@ const courseSchema = new mongoose.Schema({
     },
     IsPublished : {
         type : Boolean,
-        default : true
+        default : false
     },
     discount : {
         type : Number,
